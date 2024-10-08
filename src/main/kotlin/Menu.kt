@@ -14,13 +14,24 @@ abstract class Menu(private val title: String) {
             }
             println("${options.size}. Назад")
 
-            val choice = Scanner(System.`in`).nextInt()
+            val choice = inputInt()
             if (choice in options.indices) {
                 options[choice].second.invoke()
             } else if (choice == options.size) {
                 return
             } else {
                 println("Такого элемента нет. Попробуйте снова.")
+            }
+        }
+    }
+
+    private fun inputInt(): Int {
+        while (true) {
+            val input = Scanner(System.`in`).nextLine()
+            try {
+                return input.toInt()
+            } catch (e: NumberFormatException) {
+                println("Введите цифру.")
             }
         }
     }
